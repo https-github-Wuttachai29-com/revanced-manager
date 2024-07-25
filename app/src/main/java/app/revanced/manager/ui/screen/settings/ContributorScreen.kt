@@ -3,7 +3,6 @@ package app.revanced.manager.ui.screen.settings
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -29,16 +28,17 @@ import androidx.compose.ui.unit.times
 import app.revanced.manager.R
 import app.revanced.manager.network.dto.ReVancedContributor
 import app.revanced.manager.ui.component.AppTopBar
+import app.revanced.manager.ui.component.LazyColumnWithScrollbar
 import app.revanced.manager.ui.component.LoadingIndicator
 import app.revanced.manager.ui.viewmodel.ContributorViewModel
 import coil.compose.AsyncImage
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContributorScreen(
     onBackClick: () -> Unit,
-    viewModel: ContributorViewModel = getViewModel()
+    viewModel: ContributorViewModel = koinViewModel()
 ) {
     val repositories = viewModel.repositories
     Scaffold(
@@ -49,7 +49,7 @@ fun ContributorScreen(
             )
         },
     ) { paddingValues ->
-        LazyColumn(
+        LazyColumnWithScrollbar(
             modifier = Modifier
                 .fillMaxHeight()
                 .padding(paddingValues)
