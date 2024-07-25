@@ -31,13 +31,11 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -65,6 +63,8 @@ import app.revanced.manager.ui.component.AppTopBar
 import app.revanced.manager.ui.component.FloatInputDialog
 import app.revanced.manager.ui.component.IntInputDialog
 import app.revanced.manager.ui.component.LongInputDialog
+import app.revanced.manager.ui.component.haptics.HapticExtendedFloatingActionButton
+import app.revanced.manager.ui.component.haptics.HapticRadioButton
 import app.revanced.manager.ui.component.haptics.HapticSwitch
 import app.revanced.manager.util.isScrollingUp
 import app.revanced.manager.util.mutableStateSetOf
@@ -443,7 +443,7 @@ private class PresetOptionEditor<T : Any>(
                                 headlineContent = { Text(title) },
                                 supportingContent = value?.toString()?.let { { Text(it) } },
                                 leadingContent = {
-                                    RadioButton(
+                                    HapticRadioButton(
                                         selected = selectedPreset == presetKey,
                                         onClick = { selectedPreset = presetKey },
                                     )
@@ -601,7 +601,7 @@ private class ListOptionEditor<T : Serializable>(
                 floatingActionButton = {
                     if (deleteMode) return@Scaffold
 
-                    ExtendedFloatingActionButton(
+                    HapticExtendedFloatingActionButton(
                         text = { Text(stringResource(R.string.add)) },
                         icon = { Icon(Icons.Outlined.Add, null) },
                         expanded = lazyListState.isScrollingUp,
